@@ -73,16 +73,19 @@ across visits and redeploys, exactly like before.
 
 ## Local preview (optional)
 
-If you want to test on your own computer before relying on the dashboard:
+`wrangler.toml` intentionally does **not** include a KV namespace id — an
+earlier version of this file had a placeholder value in it, which caused
+Cloudflare Pages to reject the deployment ("Not a valid hex string"). Do not
+add one back unless it's a real namespace id.
 
-```
-npm install -g wrangler
-npx wrangler pages dev public
-```
+For the actual deployed site, the `MODAK_KV` binding comes entirely from the
+dashboard step above (step 3) — that's all you need for a working site.
 
-This needs a KV namespace id filled into `wrangler.toml` for local testing
-only — the deployed site on Cloudflare uses the dashboard binding from step
-3 above instead.
+If you'd also like to preview things locally with `wrangler pages dev`
+before pushing, that's an optional extra step: run
+`npx wrangler kv namespace create modak-ghar-kv --preview` to get a real
+namespace id, then add it to `wrangler.toml` yourself as a
+`[[kv_namespaces]]` block, or ask and this can be set up for you.
 
 ## Everything else
 
