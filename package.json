@@ -1,0 +1,12 @@
+{
+  "name": "modak-ghar",
+  "version": "1.0.0",
+  "description": "Modak Ghar — local website for Rasika Patil's chocolate modak business",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}
