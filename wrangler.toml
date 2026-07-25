@@ -1,0 +1,16 @@
+name = "modak-ghar"
+compatibility_date = "2026-07-01"
+pages_build_output_dir = "public"
+
+# This binds the KV namespace used by the Functions in ./functions
+# (gallery photos, settings, and admin login sessions).
+#
+# For local preview only (`npx wrangler pages dev public`), you can create a
+# local-only namespace and put its id below. For the real deployed site on
+# Cloudflare Pages, this binding is configured instead in the dashboard:
+# your Pages project > Settings > Functions > KV namespace bindings.
+# (The dashboard binding is what actually matters in production — this file
+# is not required for a Git-connected Pages deployment.)
+[[kv_namespaces]]
+binding = "MODAK_KV"
+id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"
