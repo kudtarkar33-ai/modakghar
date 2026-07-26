@@ -134,7 +134,7 @@ button { font-family: inherit; }
   border-bottom: 1px solid rgba(201, 151, 63, 0.18);
 }
 .nav__brand { display: flex; align-items: center; gap: 0.6rem; }
-.nav__seal { color: var(--gold-500); display: inline-flex; }
+.nav__logo { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; box-shadow: 0 4px 10px rgba(0,0,0,0.35); }
 .nav__name { font-family: var(--font-display-en); font-size: 1.25rem; color: var(--cream-100); }
 .nav__links { display: flex; gap: 1.8rem; font-weight: 500; }
 .nav__links a { opacity: 0.85; transition: opacity 0.15s, color 0.15s; }
@@ -289,6 +289,7 @@ body:not(.lang-mr) .lang-toggle__opt[data-lang-opt="en"] { color: var(--cocoa-95
   border-top: 1px solid rgba(201,151,63,0.15);
   color: var(--cream-200); opacity: 0.85; font-size: 0.9rem;
 }
+.footer__logo { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; margin: 0 auto 0.8rem; box-shadow: var(--shadow-soft); }
 .footer__brand { font-family: var(--font-display-en); font-size: 1.1rem; color: var(--gold-300); margin: 0 0 0.4rem; }
 .footer__rights { margin: 0 0 0.8rem; }
 .footer__admin { background: none; border: none; color: var(--cream-200); opacity: 0.5; font-size: 0.78rem; cursor: pointer; text-decoration: underline; }

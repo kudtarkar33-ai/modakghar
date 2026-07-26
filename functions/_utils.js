@@ -38,39 +38,61 @@ export async function readJsonBody(request) {
 }
 
 export async function getPhotos(kv) {
-  const list = await kv.get('photos:list', 'json');
-  if (list) return list;
-  await kv.put('photos:list', JSON.stringify(DEFAULT_PHOTOS));
-  return DEFAULT_PHOTOS;
+  if (!kv) return DEFAULT_PHOTOS;
+  try {
+    const list = await kv.get('photos:list', 'json');
+    if (list) return list;
+    await kv.put('photos:list', JSON.stringify(DEFAULT_PHOTOS));
+    return DEFAULT_PHOTOS;
+  } catch (e) {
+    return DEFAULT_PHOTOS;
+  }
 }
 
 export async function savePhotos(kv, photos) {
+  if (!kv) return;
   await kv.put('photos:list', JSON.stringify(photos));
 }
 
 export async function getSettings(kv) {
-  const s = await kv.get('settings', 'json');
-  if (s) return s;
-  await kv.put('settings', JSON.stringify(DEFAULT_SETTINGS));
-  return DEFAULT_SETTINGS;
+  if (!kv) return DEFAULT_SETTINGS;
+  try {
+    const s = await kv.get('settings', 'json');
+    if (s) return s;
+    await kv.put('settings', JSON.stringify(DEFAULT_SETTINGS));
+    return DEFAULT_SETTINGS;
+  } catch (e) {
+    return DEFAULT_SETTINGS;
+  }
 }
 
 export async function saveSettings(kv, settings) {
+  if (!kv) return;
   await kv.put('settings', JSON.stringify(settings));
 }
 
 export async function createSession(kv) {
+  if (!kv) throw new Error('MODAK_KV_NOT_BOUND');
   const token = crypto.randomUUID().replace(/-/g, '') + crypto.randomUUID().replace(/-/g, '');
   await kv.put('session:' + token, '1', { expirationTtl: SESSION_TTL_SECONDS });
   return token;
 }
 
 export async function isValidSession(kv, token) {
-  if (!token) return false;
-  const v = await kv.get('session:' + token);
-  return v !== null;
+  if (!kv || !token) return false;
+  try {
+    const v = await kv.get('session:' + token);
+    return v !== null;
+  } catch (e) {
+    return false;
+  }
 }
 
 export async function destroySession(kv, token) {
-  if (token) await kv.delete('session:' + token);
+  if (!kv || !token) return;
+  try {
+    await kv.delete('session:' + token);
+  } catch (e) {
+    /* ignore */
+  }
 }
